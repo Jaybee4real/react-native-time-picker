@@ -2,8 +2,17 @@
 
 # react-native-wheel-time-picker
 
-Simple and pure js time picker for react-native. It provides the same UI for Android and IOS. You can use the Wheel component independantly.
 
+This was made because the normal behaviour for a time on android and ios is somewhat differ for android and ios
+Simple and pure js time picker for react-native. It provides the same UI for Android and IOS. You can use the Wheel component independently.
+
+
+
+Example 1
+
+
+
+Example 2
 |                                                            Android                                                             |                                                              IOS                                                               |
 | :----------------------------------------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------------------------------: |
 | ![Jun-18-2021 14-16-57](https://user-images.githubusercontent.com/17980230/122510071-e6491b80-d03f-11eb-8c47-ac670fa4555e.gif) | ![Jun-18-2021 14-16-45](https://user-images.githubusercontent.com/17980230/122510087-ee08c000-d03f-11eb-8f46-a25817109316.gif) |

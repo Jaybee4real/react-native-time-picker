@@ -9,19 +9,25 @@ import {
 } from 'react-native';
 import React, { useMemo, useRef, useState } from 'react';
 import { sin } from './AnimatedMath';
+// import { EasingNode } from 'react-native-reanimated';
 
 const Value = Animated.createAnimatedComponent(Text);
+
+
 
 export interface WheelStyleProps {
   containerStyle?: ViewStyle;
   itemHeight?: number;
   itemGap?: number;
+  showIcon?: boolean;
   selectedColor?: string;
   disabledColor?: string;
   textStyle?: TextStyle;
   wheelHeight?: number;
   displayCount?: number;
+  type?: string
 }
+
 
 export interface WheelProps<T> extends WheelStyleProps {
   value: T;
@@ -42,6 +48,7 @@ export default function Wheel<T>({
   disabledColor = 'gray',
   wheelHeight,
   displayCount = 5,
+  type
 }: WheelProps<T>): React.ReactElement {
   const translateY = useRef(new Animated.Value(0));
   const renderCount =
@@ -127,11 +134,13 @@ export default function Wheel<T>({
             -radius + ((radius * 2) / displayCount) * (index - currentIndex),
             radius + ((radius * 2) / displayCount) * (index - currentIndex),
           ],
+          // easing: EasingNode.circle,
           extrapolate: 'extend',
         })
         .interpolate({
           inputRange: [-radius, radius],
           outputRange: [-Math.PI / 2, Math.PI / 2],
+          // easing: EasingNode.circle,
           extrapolate: 'clamp',
         })
     );
@@ -139,7 +148,7 @@ export default function Wheel<T>({
 
   return (
     <View
-      style={[styles.container, containerStyle]}
+      style={{ ...styles.container, ...containerStyle, marginLeft: type === "daytime" ? 0 : 10 }}
       onLayout={(evt) => setHeight(evt.nativeEvent.layout.height)}
       {...panResponder.panHandlers}
     >
@@ -148,7 +157,6 @@ export default function Wheel<T>({
         return (
           <Value
             style={[
-              textStyle,
               // eslint-disable-next-line react-native/no-inline-styles
               {
                 position: 'absolute',
@@ -159,18 +167,19 @@ export default function Wheel<T>({
                   },
                   {
                     rotateX: animatedAngle.interpolate({
-                      inputRange: [-Math.PI / 2, Math.PI / 2],
+                      inputRange: [-Math.PI / 2.7, Math.PI / 3],
                       outputRange: ['-90deg', '90deg'],
+                      // easing: EasingNode.cicle,
                       extrapolate: 'clamp',
                     }),
                   },
                 ],
                 color: displayValue === value ? selectedColor : disabledColor,
+                ...textStyle,
               },
             ]}
-            key={`${value}${
-              index > displayValues.length / 2 ? 'Post' : 'Before'
-            }${displayValue ?? 'null' + index}`}
+            key={`${value}${index > displayValues.length / 2 ? 'Post' : 'Before'
+              }${displayValue ?? 'null' + index}`}
           >
             {displayValue}
           </Value>
@@ -183,10 +192,11 @@ export default function Wheel<T>({
 const styles = StyleSheet.create({
   container: {
     height: '100%',
-    minWidth: 30,
+    width: 50,
     overflow: 'hidden',
     alignItems: 'center',
     justifyContent: 'center',
+    marginRight: 10,
   },
   contentContainer: {
     justifyContent: 'space-between',

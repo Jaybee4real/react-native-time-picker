@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
-import TimePicker from 'react-native-wheel-time-picker';
+import TimePicker from "@jaybee4real/react-native-wheel-time-picker";
 import { useMemo } from 'react';
 
 const MILLISECONDS_PER_MINUTE = 60 * 1000;
@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#ededed',
+    backgroundColor: '#000000',
   },
   timePickerContainer: {
     height: 90,

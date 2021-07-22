@@ -14,17 +14,7 @@ const MILLISECONDS_PER_MINUTE = 60 * 1000;
 const MILLISECONDS_PER_HOUR = MILLISECONDS_PER_MINUTE * 60;
 const MILLISECONDS_PER_DAY = MILLISECONDS_PER_HOUR * 24;
 
-const styles = StyleSheet.create({
-  container: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    minWidth: 100,
-    height: 100,
-    overflow: 'hidden',
-    borderRadius: 4,
-  },
-});
+
 
 function createNumberList(num: number) {
   return new Array(num)
@@ -47,6 +37,7 @@ interface Props {
   wheelProps?: WheelStyleProps;
   use24HourSystem?: boolean;
   showSeconds?: boolean;
+  showIcon?: boolean
 }
 
 export default function TimePicker({
@@ -104,19 +95,6 @@ export default function TimePicker({
   }, [hour, use24HourSystem]);
   return (
     <View style={[styles.container, containerStyle]}>
-      {!use24HourSystem && (
-        <Wheel
-          key={'am/pm'}
-          value={hour >= 12 ? 'PM' : 'AM'}
-          values={['AM', 'PM']}
-          setValue={(newValue) => {
-            changeTimeValue('hour', (hour % 12) + (newValue === 'PM' ? 12 : 0));
-          }}
-          onScroll={onScroll}
-          textStyle={textStyle}
-          {...wheelProps}
-        />
-      )}
       <Wheel
         key={'hour'}
         value={displayHourValue}
@@ -131,16 +109,30 @@ export default function TimePicker({
         textStyle={textStyle}
         {...wheelProps}
       />
-      <Text style={textStyle}>:</Text>
+      <Text style={{ ...styles.divider, ...textStyle }}>:</Text>
       <Wheel
         key={'min'}
         value={minute < 10 ? `0${minute}` : `${minute}`}
         values={SIXTY_LIST}
         setValue={(newValue) => changeTimeValue('minute', parseInt(newValue))}
         onScroll={onScroll}
-        textStyle={textStyle}
+        textStyle={{...textStyle}}
         {...wheelProps}
       />
+      {!use24HourSystem && (
+        <Wheel
+          key={'am/pm'}
+          type="daytime"
+          value={hour <= 12 ? 'am' : 'pm'}
+          values={['am', 'pm']}
+          setValue={(newValue) => {
+            changeTimeValue('hour', (hour % 12) + (newValue === 'pm' ? 12 : 0));
+          }}
+          onScroll={onScroll}
+          {...wheelProps}
+          textStyle={{ ...textStyle, fontSize: 18, fontWeight: "600", paddingTop: 2 }}
+        />
+      )}
       {showSeconds && (
         <>
           <Text style={textStyle}>:</Text>
@@ -152,7 +144,7 @@ export default function TimePicker({
               changeTimeValue('second', parseInt(newValue))
             }
             onScroll={onScroll}
-            textStyle={textStyle}
+            textStyle={{ ...textStyle, fontSize: 15 }}
             {...wheelProps}
           />
         </>
@@ -160,3 +152,19 @@ export default function TimePicker({
     </View>
   );
 }
+
+
+const styles = StyleSheet.create({
+  container: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    minWidth: 100,
+    height: 100,
+    overflow: 'hidden',
+    borderRadius: 4,
+  },
+  divider: {
+    color: "white", fontWeight: "700", marginBottom: 10,
+  },
+})

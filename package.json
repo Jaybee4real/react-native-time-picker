@@ -1,7 +1,7 @@
 {
-  "name": "react-native-wheel-time-picker",
-  "version": "0.4.2",
-  "description": "simple pure js time picker for react-native",
+  "name": "@jaybee4real/react-native-wheel-time-picker",
+  "version": "0.1.0",
+  "description": "simple pure js time picker for react-native (Wheel Style)",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
   "types": "lib/typescript/index.d.ts",
@@ -34,15 +34,19 @@
   "keywords": [
     "react-native",
     "ios",
-    "android"
+    "android",
+    "ios time picker",
+    "ios-time-picker",
+    "react-native-timepicker-wheel",
+    "react-native-timepicker"
   ],
-  "repository": "https://github.com/JongtaekChoi/react-native-time-picker",
-  "author": "JongtaekChoi <lastchoice86@naver.com> (https://github.com/JongtaekChoi)",
+  "repository": "https://github.com/Jaybee4real/react-native-time-picker",
+  "author": "Jaybee4real <lastchoice86@naver.com> (https://github.com/JongtaekChoi)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/JongtaekChoi/react-native-time-picker/issues"
+    "url": "https://github.com/Jaybee4real/react-native-time-picker/issues"
   },
-  "homepage": "https://github.com/JongtaekChoi/react-native-time-picker#readme",
+  "homepage": "https://github.com/Jaybee4real/react-native-time-picker#readme",
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
   },
@@ -58,7 +62,6 @@
     "eslint": "^7.2.0",
     "eslint-config-prettier": "^7.0.0",
     "eslint-plugin-prettier": "^3.1.3",
-    "husky": "^4.2.5",
     "jest": "^26.0.1",
     "pod-install": "^0.1.0",
     "prettier": "^2.0.5",
